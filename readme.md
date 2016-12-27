@@ -35,6 +35,7 @@ Objects
 |Field      |Type    |
 |-----------|--------|
 |username   |string  |
+|password   |string  |
 |admin      |boollean|
 |img        |string  |
 |description|string  |
