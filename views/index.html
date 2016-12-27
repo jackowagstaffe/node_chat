@@ -2,6 +2,8 @@
 <html>
     <head>
         <link rel="stylesheet" href="/css/app.css">
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     </head>
 
     <body>
@@ -11,12 +13,26 @@
             <div class="messages-container">
 
             </div>
-            <div class="messages-form">
-                <form>
-                    <textarea name="text"></textarea>
-                    <button type="submit">send</button>
+            <div class="messages-form-container">
+                <form action="" id="messages-form">
+                    <textarea name="text" id="text"></textarea>
+                    <button>send</button>
                 </form>
             </div>
         </div>
+
+        <script>
+            var socket = io();
+            $('form').submit(function(event) {
+              console.log($('#text').val());
+              socket.emit('chat.message', $('#text').val());
+               $('#text').val('');
+                event.preventDefault();
+            });
+
+            socket.on('chat.message', function(data) {
+              $('.messages-container').append('<p>' + data + '</p>');
+            });
+        </script>
     </body>
 </html>

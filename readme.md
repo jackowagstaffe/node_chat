@@ -4,8 +4,11 @@ Node Chat App
 Routes
 ------
 
-### Users
  - `GET /` load single page chat app
+ - `POST /login` login
+ - `POST /logout` logout
+
+### Users
  - `GET /api/users` list users
  - `GET /api/users/{id}` get info about a user
  - `POST /api/users`

@@ -10,7 +10,8 @@
   "author": "Jack Wagstaffe",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.10.2"
+    "express": "^4.10.2",
+    "socket.io": "^1.7.2"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
