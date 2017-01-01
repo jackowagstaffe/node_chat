@@ -5,13 +5,13 @@ Routes
 ------
 
  - `GET /` load single page chat app
- - `POST /login` login
- - `POST /logout` logout
+ - `POST /api/login` login
+ - `POST /PI/logout` logout
 
 ### Users
  - `GET /api/users` list users
  - `GET /api/users/{id}` get info about a user
- - `POST /api/users`
+ - `POST /api/users` create a user
  - `PUT /api/users/{id}` update a user
  - `DELETE /api/users/{id}` delete a user
 
@@ -39,7 +39,7 @@ Objects
 |-----------|--------|
 |username   |string  |
 |password   |string  |
-|admin      |boollean|
+|admin      |boolean |
 |img        |string  |
 |description|string  |
 

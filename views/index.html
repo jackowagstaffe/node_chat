@@ -22,15 +22,15 @@
         </div>
 
         <script>
-            var socket = io();
-            $('form').submit(function(event) {
+            var socket = io('/threads');
+            $('form').submit(function (event) {
               console.log($('#text').val());
               socket.emit('chat.message', $('#text').val());
-               $('#text').val('');
-                event.preventDefault();
+              $('#text').val('');
+              event.preventDefault();
             });
 
-            socket.on('chat.message', function(data) {
+            socket.on('chat.message', function (data) {
               $('.messages-container').append('<p>' + data + '</p>');
             });
         </script>

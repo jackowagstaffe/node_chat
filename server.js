@@ -1,27 +1,54 @@
-var express = require('express')
-var app = express()
+require('dotenv').config();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var bodyParser = require('body-parser');
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
+var mongoUrl = process.env.MONGO_ADDRESS;
+
+var controllers = require('./controllers');
+var sockets = require('./sockets');
+
+// parse application/json
+app.use(bodyParser.json());
 
 //expose public directory
 app.use(express.static('public'));
 
-app.get('/', function(request, response){
-    response.sendFile(__dirname + '/views/index.html');
-});
+app.use(controllers);
 
-io.on('connection', function(socket){
-    console.log('a user connected');
+// app.get('/put', function (request, response) {
+//   MongoClient.connect(mongoUrl, function (err, db) {
+//     if (err) {
+//       return console.dir(err);
+//     }
+//
+//     var collection  = db.collection('test');
+//     collection.insert({
+//       name: 'hello',
+//       password: 'password',
+//     });
+//   });
+//
+//   response.send('lol');
+// });
+//
+// app.get('/get', function (request, response) {
+//   MongoClient.connect(mongoUrl, function (err, db) {
+//     if (err) { return console.dir(err); }
+//
+//     var collection = db.collection('test');
+//     var data = collection.find({ name: 'hello' }).toArray(function (err, items) {
+//       console.log(items);
+//
+//       response.write('lol');
+//       response.end();
+//     });
+//   });
+// });
 
-    socket.on('chat.message', function(data) {
-        console.log('message: ' + data);
-        io.emit('chat.message', data);
-    })
+sockets(http);
 
-    socket.on('disconnect', function(){
-        console.log('user disconnected');
-    });
-});
-
-http.listen(80, '192.168.33.10');
-console.log('Server running at http://192.168.33.10:80/');
+http.listen(process.env.PORT, process.env.ADDRESS);
+console.log('Server running at http://' + process.env.ADDRESS + ':' + process.env.PORT + '/');
