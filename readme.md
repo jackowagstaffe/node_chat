@@ -6,7 +6,7 @@ Routes
 
  - `GET /` load single page chat app
  - `POST /api/login` login
- - `POST /PI/logout` logout
+ - `POST /api/logout` logout
 
 ### Users
  - `GET /api/users` list users

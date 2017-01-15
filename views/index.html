@@ -25,13 +25,20 @@
             var socket = io('/threads');
             $('form').submit(function (event) {
               console.log($('#text').val());
-              socket.emit('chat.message', $('#text').val());
+              socket.emit('message', {
+                text: $('#text').val(),
+                user: '5873fbd96f9c3f09bfaab746',
+                thread: '587a88487443150e34a820f5',
+              });
               $('#text').val('');
               event.preventDefault();
             });
 
-            socket.on('chat.message', function (data) {
-              $('.messages-container').append('<p>' + data + '</p>');
+            socket.emit('subscribe', '587a88487443150e34a820f5');
+
+            socket.on('message', function (data) {
+              console.log(data);
+              $('.messages-container').append('<p>' + data.text + '</p>');
             });
         </script>
     </body>
