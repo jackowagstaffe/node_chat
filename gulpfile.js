@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var babel = require('gulp-babel');
 var sass = require('gulp-sass');
 var prefix = require('gulp-autoprefixer');
 var paths = {
@@ -23,6 +24,12 @@ gulp.task('sass', function () {
     'last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'
   ))
   .pipe(gulp.dest(paths.styles.dest));
+});
+
+gulp.task('babel', function () {
+  return gulp.src('assets/js/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('public/js'));
 });
 
 gulp.task('default', ['sass'], function () {

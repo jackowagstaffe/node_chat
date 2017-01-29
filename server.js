@@ -27,6 +27,13 @@ app.use(bodyParser.json());
 //parse url params
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//set some hilarious header info
+app.use(function (request, response, next) {
+  response.setHeader('Server', 'Servery McServerface');
+
+  next();
+});
+
 //session
 app.use(session({
   secret: process.env.SECRET,
